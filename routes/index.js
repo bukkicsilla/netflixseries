@@ -6,6 +6,6 @@ var netflixSeries = require('../controllers/series');
   res.render('index', { title: 'Express' });
 });*/
 
-router.get('/netflixseries', netflixSeries.getSeries);
-router.get('/netflixseries/movie', netflixSeries.getMovie);
+router.get('/', netflixSeries.getSeries);
+router.get('/movie', netflixSeries.getMovie);
 module.exports = router;
