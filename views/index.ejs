@@ -8,9 +8,10 @@
   <body>
     <!--<h1><%= title %></h1>-->
     <h1>Welcome to <%= title %></h1>
+    <p> <%= info.topic%></p>
       
       <ul>
-          <li><a href="/movie">The 100</a></li>
+          <!--<li><a href="/movie">The 100</a></li>
           <li>Grey's anatomy</li>
           <li>When calls the heart</li>
           <li>The Hunt</li>
@@ -21,7 +22,10 @@
           <li> Anne with an 'E'</li>
           <li>FantastiC</li>
           <li>The 4400</li>
-          <li>The returned</li>
+          <li>The returned</li>-->
+          <% movies.forEach(function(movie){ %>
+          <li> <a href="/movie"><%= movie.name %></a></li>
+          <% }); %>
       </ul>
   </body>
 </html>
