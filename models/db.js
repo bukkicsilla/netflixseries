@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/Netflix';
+if (process.env.NODE_ENV === 'production'){
+      dbURI = process.env.MONGODB_URI;
+    //dbURI = 'mongodb://heroku_l1zxvgh6:2tvfgoopgt9fhq8imhgfkjo7cj@ds123399.mlab.com:23399/heroku_l1zxvgh6';
+}
+//NODE_ENV=production MONGODB_URI=mongodb://heroku_l1zxvgh6:2tvfgoopgt9fhq8imhgfkjo7cj@ds123399.mlab.com:23399/heroku_l1zxvgh6 nodemon start
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function(){
@@ -40,3 +45,14 @@ process.on('SIGTERM', function() {
 });
 
 require('./movies');
+
+//heroku addons:add mongolab
+//heroku addons:open mongolab
+//heroku config:get MONGODB_URI
+//mLab
+//mongodb://heroku_l1zxvgh6:2tvfgoopgt9fhq8imhgfkjo7cj@ds123399.mlab.com:23399/heroku_l1zxvgh6
+
+//mkdir -p ~/tmp/mongodumpnetflix
+//./mongodump -h localhost:27017 -d Netflix -o ~/tmp/mongodumpnetflix
+
+//./mongorestore -h ds123399.mlab.com:23399 -d heroku_l1zxvgh6 -u heroku_l1zxvgh6 -p 2tvfgoopgt9fhq8imhgfkjo7cj ~/tmp/mongodumpnetflix/Netflix
