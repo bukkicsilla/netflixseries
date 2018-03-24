@@ -1,3 +1,52 @@
+var request = require('request');
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+}
+
+var apiOps = {
+  server : "http://localhost:3000"
+};
+console.log('server ', apiOps.server);
+if (process.env.NODE_ENV === 'production') {
+    apiOps.server = "https://netflixseries.herokuapp.com";
+}
+
+module.exports.moviesAll = function(req, res){
+    var requestOps, path;
+    path = '/api/netflixseries';
+    requestOps = {
+       url: apiOps.server + path,
+       method:"GET",
+        json: {},
+        qs: {}
+        };
+    request(requestOps, function(err, response, body){
+        //renderMovies(req, res, body);
+        var msg;
+         //shuffle(body);
+      if (!(body instanceof Array)){
+        msg = "api lookup error";
+        body = [];
+    } else {
+        if(!body.length){
+            msg = "no question found";
+        }
+    }//else
+        //rendering
+        res.render('index', {
+            title : 'Netflix series',
+            info:{
+                topic: 'CRUD with Express and MongoDB'
+            },
+            movies: body,
+            message: msg
+         });
+    })
+}
+
 module.exports.getSeries = function(req, res){
    res.render('index', {
        title: 'Netflix series',
