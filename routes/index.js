@@ -9,5 +9,7 @@ var netflixSeries = require('../controllers/series');
 
 //router.get('/', netflixSeries.getSeries);
 router.get('/', netflixSeries.moviesAll);
-router.get('/movie', netflixSeries.getMovie);
+//router.get('/movie', netflixSeries.getMovie);
+router.get('/movie/:movieid', netflixSeries.readMovie);
+
 module.exports = router;

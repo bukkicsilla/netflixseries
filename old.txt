@@ -1,0 +1,8 @@
+
+from movie.ejs
+
+<% for(var i=0; i<info.genres.length; i++) {%>
+    <li>
+      <span><%= info.genres[i] %></span>
+    </li>
+  <% } %>

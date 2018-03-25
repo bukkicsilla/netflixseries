@@ -47,7 +47,7 @@ module.exports.moviesAll = function(req, res){
     })
 }
 
-module.exports.getSeries = function(req, res){
+/*module.exports.getSeries = function(req, res){
    res.render('index', {
        title: 'Netflix series',
        info: { 
@@ -126,7 +126,60 @@ module.exports.getSeries = function(req, res){
            
        ]
     });
-};
+};*/
+
+module.exports.readMovie = function(req,res){
+    var requestOps, path;
+    path = "/api/netflixseries/" + req.params.movieid;
+    //console.log("path answer " + path);
+    requestOps = {
+        url: apiOps.server + path,
+        method: "GET",
+        json: {}
+    };
+    request(requestOps, 
+           function(err, response, body){
+            console.log("body "+ body);
+            if (response.statusCode === 200){
+                console.log('success');
+               //renderMovie(req, res, body);   
+                res.render('movie', {
+            title: 'Movie info',
+            info:{
+                name: body.name,
+                seasons: body.seasons,
+                years: body.years,
+                genres: body.genres,
+                netflixlink: body.netflixlink
+            }
+            
+    });
+            } else  {
+                //var title;
+                if (response.statusCode === 404){
+                    title = "404, page not found";
+                    console.log("Try with a different id, page not found.");
+                } else {
+                    title = response.statusCode + ", sorry";
+                    console.log("something went wrong");
+                }
+                
+           res.status(response.statusCode);
+            //body = [];
+            console.log(err);
+            res.render('error', {
+               title: title,
+               message: "Try with different id, page not found",
+                error: {
+                    status: response.statusCode,
+                    stack: 'go back to movie list'
+                }
+           });   
+         }//else
+        }//function
+           );
+    
+}
 
 module.exports.getMovie = function(req, res){
     res.render('movie', {
@@ -135,8 +188,16 @@ module.exports.getMovie = function(req, res){
            name: 'The 4400',
            seasons: '4',
            years: '2004-2207',
-           genres: ['TV Shows', 'TV Dramas', 'TV Mysteries'],
-           netflixlink: 'https://www.netflix.com/search?q=4400&jbv=70157231&jbp=0&jbr=0'
+           //genres: ['TV Shows', 'TV Dramas', 'TV Mysteries'],
+           genres: [{
+                     genre: 'TV SHOWS',
+                    },
+                    {
+                     genre: 'TV DRAMAS'    
+                    }
+               
+           ],
+            netflixlink: 'https://www.netflix.com/search?q=4400&jbv=70157231&jbp=0&jbr=0'
     }
     });
 };

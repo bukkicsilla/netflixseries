@@ -19,11 +19,12 @@
           <li>TV Sci-Fi & Fantasy</li>
       </ul>-->
       <ul>
-  <% for(var i=0; i<info.genres.length; i++) {%>
-    <li>
-      <span><%= info.genres[i] %></span>
-    </li>
-  <% } %>
+  
+          <% info.genres.forEach(function(genre){ %>
+          <li>
+          <span><%= genre.genre %></span>
+          </li>
+          <% }); %>
 </ul>
       <!--<a href="https://www.netflix.com/search?q=the%20100&jbv=70283264&jbp=0&jbr=0"> Movie on Netflix</a>-->
       <a href='<%= info.netflixlink%>'> Movie on Netflix </a>

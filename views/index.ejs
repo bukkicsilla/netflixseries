@@ -24,7 +24,8 @@
           <li>The 4400</li>
           <li>The returned</li>-->
           <% movies.forEach(function(movie){ %>
-          <li> <a href="/movie"><%= movie.name %></a></li>
+          <!--<li> <a href="/movie"><%= movie.name %></a></li>-->
+          <li> <a href='/movie/<%= movie._id %>'><%= movie.name %></a></li>
           <% }); %>
       </ul>
   </body>
