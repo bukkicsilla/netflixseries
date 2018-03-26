@@ -12,4 +12,9 @@ router.get('/', netflixSeries.moviesAll);
 //router.get('/movie', netflixSeries.getMovie);
 router.get('/movie/:movieid', netflixSeries.readMovie);
 
+router.get('/newmovie', netflixSeries.formMovie);
+router.post('/newmovie', netflixSeries.createMovie);
+
+router.get('/deletemovie/:movieid', netflixSeries.deleteMovie);
+
 module.exports = router;

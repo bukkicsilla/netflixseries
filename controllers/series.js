@@ -65,6 +65,7 @@ module.exports.readMovie = function(req,res){
                //renderMovie(req, res, body);   
                 res.render('movie', {
             title: 'Movie info',
+            movie: body,
             info:{
                 name: body.name,
                 seasons: body.seasons,
@@ -83,7 +84,7 @@ module.exports.readMovie = function(req,res){
                 }
                 
            res.status(response.statusCode);
-            console.log(err);
+            //console.log(err);
             res.render('error', {
                title: title,
                message: "Try with different id, page not found",
@@ -96,3 +97,47 @@ module.exports.readMovie = function(req,res){
         });//function
 }
 
+module.exports.formMovie = function(req, res){
+    
+}
+
+module.exports.createMovie = function(req, res){
+    
+}
+
+module.exports.deleteMovie = function(req, res){
+    var requestOps, path;
+    //console.log(req.params);
+    path = "/api/netflixseries/" + req.params.movieid;
+    console.log("path in delete " + path);
+    requestOps = {
+        url: apiOps.server + path,
+        method: "DELETE",
+        json: {}
+    };
+    request(requestOps, 
+           function(err, response, body){
+            if (response.statusCode === 204){
+                res.redirect('/');
+            } else  {
+                if (response.statusCode === 404){
+                    title = "404, page not found";
+                    console.log("Try with a different id, page not found.");
+                } else {
+                    title = response.statusCode + ", sorry";
+                    console.log("something went wrong");
+                }
+                
+           res.status(response.statusCode);
+            res.render('error', {
+               title: title,
+               message: "Try with different id, page not found",
+                error: {
+                    status: response.statusCode,
+                    stack: 'go back to movie list'
+                }
+           });    
+         }//else
+        }
+           );
+}

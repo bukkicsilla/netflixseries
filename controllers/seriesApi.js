@@ -57,6 +57,8 @@ module.exports.createMovie = function(req, res){
 
 module.exports.deleteMovie = function(req, res){
     var movieid = req.params.movieid;
+    console.log("api req params ", req.params);
+    console.log("api delete ", movieid);
     if (movieid){
         Mov.findByIdAndRemove(movieid)
            .exec(
