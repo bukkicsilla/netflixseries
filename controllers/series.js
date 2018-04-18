@@ -98,11 +98,52 @@ module.exports.readMovie = function(req,res){
 }
 
 module.exports.formMovie = function(req, res){
-    
+    res.render('createmovie', {
+    title: 'Create Movie',
+    error: req.query.err
+  });
 }
 
 module.exports.createMovie = function(req, res){
-    
+    var requestOps, path, postdata;
+    path = '/api/netflixseries';
+    postdata = {
+    name: req.body.formtitle,
+    seasons: req.body.formseasons,
+    years: req.body.formyears,
+    netflixlink: req.body.formnetflix
+    //answers: new Array(req.body.answer)
+  };
+    console.log("********** ", postdata.name);
+    requestOps = {
+    url : apiOps.server + path,
+    method : "POST",
+    json : postdata
+  };
+  if (!postdata.name) {
+      console.log("empry string");
+    res.redirect('/newmovie/');
+  } else {
+    request(
+      requestOps,
+      function(err, response, body) {
+          console.log("name ", body.name);
+        if (response.statusCode === 201) {
+          res.redirect('/');
+        } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+          res.redirect('/newquestion/');
+        } else {
+          console.log(body);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('generic-text', {
+           title : 'You used a wrong string, try again please!',
+           content : 'title is unique'
+  });
+        }
+      }
+    );
+  }  
 }
 
 module.exports.deleteMovie = function(req, res){
