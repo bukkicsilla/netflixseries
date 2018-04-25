@@ -55,6 +55,48 @@ module.exports.createMovie = function(req, res){
 //test
 //{"name" : "The puma", "seasons": 15, "years": "2000-", "netflixlink":"https://www.puma.org", "genres": [{"genre":"TV Shows"}, {"genre": //"Docuseries"}]}
 
+module.exports.updateMovie = function(req, res){
+        if(!req.params.movieid){
+            res.status(404);
+            res.json({"message": "id not found, it is required"});    
+            return;
+    }
+    Mov.findById(req.params.movieid)
+       .select('-name -seasons -years -netflixlink')
+       .exec(
+        function(err, movie){
+            if(!movie){
+                console.log("id ", err);
+                res.status(404);
+                res.json({"message": "movie id is not found"});
+                return;
+            } else if (err) {
+                console.log("ERROR");
+                res.status(400);
+                res.json(err);
+                return;
+            }
+            //questionanswer.question = req.body.question;
+            //questionanswer.answers = req.body.answers;
+            //concatenation of the old list and the new item in list
+            movie.genres = movie.genres.concat(req.body.genres);
+            console.log("API genre " + movie.genres);
+            movie.save(function(err,  movie){
+                if (err){
+                    console.log("ERR");
+                    res.status(404);
+                    res.json(err);
+                } else {
+                    console.log("SUCCESS");
+                    res.status(200);
+                    res.json(movie);
+                }
+            });
+        })
+};
+
+//{"genres" : [{"genre":"Funny Movie"}]}
+
 module.exports.deleteMovie = function(req, res){
     var movieid = req.params.movieid;
     console.log("api req params ", req.params);

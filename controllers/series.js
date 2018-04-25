@@ -114,7 +114,9 @@ module.exports.createMovie = function(req, res){
     netflixlink: req.body.formnetflix
     //answers: new Array(req.body.answer)
   };
+    
     console.log("********** ", postdata.name);
+    
     requestOps = {
     url : apiOps.server + path,
     method : "POST",
