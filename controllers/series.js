@@ -191,11 +191,12 @@ module.exports.updateGenres = function(req, res){
           console.log(body);
           //_showError(req, res, response.statusCode);
         res.status(response.statusCode);
-        res.render('error', {
+        res.render('errormovie', {
                message: "field is empty",
+               movieid: movieid,
                 error: {
                     status: response.statusCode,
-                    stack: 'go back to movie list'
+                    stack: 'go back to movie'
                 }
            });
         }
