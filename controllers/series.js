@@ -134,7 +134,7 @@ module.exports.createMovie = function(req, res){
         if (response.statusCode === 201) {
           res.redirect('/');
         } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
-          res.redirect('/newquestion/');
+          res.redirect('/newmovie/');
         } else {
           console.log(body);
           //_showError(req, res, response.statusCode);
@@ -175,6 +175,7 @@ module.exports.updateGenres = function(req, res){
     method : "PUT",
     json : postdata
   };
+    console.log("empty ?", !postdata.genres );
    if (!postdata.genres) {
       console.log("empry string");
     res.redirect('/');
@@ -191,9 +192,12 @@ module.exports.updateGenres = function(req, res){
           //_showError(req, res, response.statusCode);
         res.status(response.statusCode);
         res.render('error', {
-           title : 'error',
-           content : 'empty string is not allowed'
-  });
+               message: "field is empty",
+                error: {
+                    status: response.statusCode,
+                    stack: 'go back to movie list'
+                }
+           });
         }
       }
     );
@@ -225,7 +229,6 @@ module.exports.deleteMovie = function(req, res){
                 
            res.status(response.statusCode);
             res.render('error', {
-               title: title,
                message: "Try with different id, page not found",
                 error: {
                     status: response.statusCode,

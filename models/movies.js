@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var genreSchema = new mongoose.Schema({
-    genre: {type: String}
+    genre: {type: String, required: true}
 });
 
 var movieSchema = new mongoose.Schema({
