@@ -1,33 +1,9 @@
-
-
-block content
-  .row.page-header
-    .col-lg-12
-      h1= pageHeader.title
-  .row
-    .col-xs-12.col-md-6
-      
-      form.form-horizontal(action="", method="post", role="form")
-        - if (error == "val")
-          .alert.alert-danger(role="alert") All fields required, please try again
-        .form-group
-          label.col-xs-10.col-sm-3.control-label(for="number") Number
-          .col-xs-12.col-sm-9
-            input#number.form-control(name="number")
-        .form-group
-          label.col-xs-10.col-sm-3.control-label(for="question") Question
-          .col-xs-12.col-sm-9
-            input#question.form-control(name="question")
-        
-        
-        button.btn.btn-default.pull-right Add Question
-    .col-xs-12.col-md-4
-
 <!DOCTYPE html>
 <html>
   <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
+      
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -35,7 +11,7 @@ block content
   <body>
     <h1> Update the Genres </h1>
       
-      <p> </p>
+      <p> name: <%= title %> </p>
       <form class="form-horizontal" action="" method="post" role="form">
           
           <p> All fields are requiered! </p>

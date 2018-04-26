@@ -98,6 +98,7 @@ module.exports.readMovie = function(req,res){
 }
 
 module.exports.formMovie = function(req, res){
+    console.log("create movie");
     res.render('createmovie', {
     title: 'Create Movie',
     error: req.query.err
@@ -147,6 +148,57 @@ module.exports.createMovie = function(req, res){
     );
   }  
 }
+
+module.exports.formGenres = function(req, res){
+    console.log("req", req.params);
+    res.render('updategenres', {
+    title: 'Update Genres',
+    error: req.query.err
+  });
+};
+
+module.exports.updateGenres = function(req, res){
+    var requestOps, path, movieid, postdata;
+    movieid = req.params.movieid;
+    console.log("id :::" + movieid);
+    
+  path = "/api/netflixseries/" + req.params.movieid;
+  
+  postdata = {
+    //answers: req.body.answer
+    //answers: new Array(req.body.answer)
+      genres: [{"genre": req.body.formgenre}]
+  };
+    console.log("new genre ", postdata.genres);
+    requestOps = {
+    url : apiOps.server + path,
+    method : "PUT",
+    json : postdata
+  };
+   if (!postdata.genres) {
+      console.log("empry string");
+    res.redirect('/');
+  } else {
+    request(
+      requestOps,
+      function(err, response, body) {
+        if (response.statusCode === 200) {
+          res.redirect('/movie/'+movieid);
+        } else if (response.statusCode === 400 && body.genres && body.genres === "ValidationError" ) {
+          res.redirect('/newmovie/');
+        } else {
+          console.log(body);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('error', {
+           title : 'error',
+           content : 'empty string is not allowed'
+  });
+        }
+      }
+    );
+  } //else
+};
 
 module.exports.deleteMovie = function(req, res){
     var requestOps, path;
