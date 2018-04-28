@@ -18,6 +18,10 @@ router.post('/newmovie', netflixSeries.createMovie);
 router.get('/updatemovie/:movieid', netflixSeries.formGenres);
 router.post('/updatemovie/:movieid', netflixSeries.updateGenres);
 
+
+router.get('/replaceinfo/:movieid', netflixSeries.formInfo);
+router.post('/replaceinfo/:movieid', netflixSeries.replaceInfo);
+
 router.get('/deletemovie/:movieid', netflixSeries.deleteMovie);
 
 module.exports = router;
