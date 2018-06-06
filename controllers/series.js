@@ -209,6 +209,8 @@ module.exports.updateGenres = function(req, res){
   } //else
 };
 
+/***********************************************************************************************************/
+
 module.exports.formInfo = function(req, res){
     /*res.render('replaceinfo', {
     title: 'Replace Info',
@@ -305,6 +307,98 @@ module.exports.replaceInfo = function(req, res){
     
     
 }
+
+/*************************************************************************************************************/
+
+module.exports.formSeasons = function(req, res){
+    
+    var requestOps, path;
+    path = "/api/netflixseries/" + req.params.movieid;
+    
+    requestOps = {
+        url: apiOps.server + path,
+        method: "GET",
+        json: {}
+    };
+    request(requestOps, 
+           function(err, response, body){
+            console.log("body "+ body);
+            //if (response.statusCode === 200){
+                console.log('success');
+               //renderMovie(req, res, body);   
+                res.render('replaceseasons', {
+            title: 'Replace Seasons',
+            error: req.query.err,
+            movie: body,
+            info:{
+                name: body.name,
+                seasons: body.seasons,
+                years: body.years,
+                genres: body.genres,
+                netflixlink: body.netflixlink
+            }
+      });
+            //}
+       
+    });
+    
+};
+
+module.exports.replaceSeasons = function(req, res){
+    
+    var requestOps, path, movieid, postdata;
+    movieid = req.params.movieid;
+    //console.log("id :::" + movieid);
+    console.log("******  ", req.params);
+  path = "/api/netflixseries/" + req.params.movieid;
+  
+  postdata = {
+      seasons: req.body.formseasons
+  };
+    
+    //console.log("replace seasons ", postdata.seasons);
+    requestOps = {
+    url : apiOps.server + path,
+    method : "PATCH",
+    json : postdata
+  };
+    console.log("seasons ", postdata.seasons);
+    if (!postdata.seasons) {
+      console.log("empry string");
+    res.redirect('/replaceseasons/'+movieid);
+  }
+    else {
+    request(
+      requestOps,
+      function(err, response, body) {
+          console.log("here");
+        if (response.statusCode === 200) {
+            console.log("ok 200");
+          res.redirect('/movie/'+movieid);
+        } else if (response.statusCode === 400 && body.formseasons && body.formseasons === "ValidationError" ) {
+          res.redirect('/newmovie/');
+        } else {
+          console.log(body);
+          //_showError(req, res, response.statusCode);
+        res.status(response.statusCode);
+        res.render('errormovie', {
+           message: "field is empty",
+               movieid: movieid,
+                error: {
+                    status: response.statusCode,
+                    stack: 'go back to movie'
+                }
+  });
+        }
+      }
+    );
+  } //else 
+    
+    
+    
+}
+
+/**************************************************************************************************************************/
 
 module.exports.deleteMovie = function(req, res){
     var requestOps, path;

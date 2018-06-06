@@ -21,7 +21,8 @@
           <li>TV Dramas</li>
           <li>TV Sci-Fi & Fantasy</li>
       </ul>-->
-      <ul>
+      Genres:
+      <ul> 
   
           <% info.genres.forEach(function(genre){ %>
           <li>
@@ -33,8 +34,11 @@
       <a href='<%= info.netflixlink%>'> Movie on Netflix </a>
       <!--a.btn.btn-warning.pull-right(href="/deletequestion/#{question._id}") Delete this!!!-->
     <hr/>
-      <a href='/deletemovie/<%= movie._id %>' class='btn btn-warning'> Delete this movie. </a>
-      <a href='/updatemovie/<%= movie._id %>' class='btn btn-info'> Update genres. </a>
-      <a href='/replaceinfo/<%= movie._id %>' class='btn btn-primary'> Replace details. </a>
+      <a href='/deletemovie/<%= movie._id %>' class='btn btn-danger'> Delete this movie </a><br><br>
+      <a href='/updatemovie/<%= movie._id %>' class='btn btn-info'> Update genres</a> <br><br>
+      <a href='/replaceseasons/<%= movie._id %>' class='btn btn-default'> Replace seasons </a>
+      <a href='/replaceyears/<%= movie._id %>' class='btn btn-default'> Replace years </a>
+      <a href='/replacegenres/<%= movie._id %>' class='btn btn-default'> Replace genres </a>
+      <a href='/replacelink/<%= movie._id %>' class='btn btn-default'> Replace link </a>
   </body>
 </html>

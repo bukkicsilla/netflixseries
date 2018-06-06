@@ -22,6 +22,18 @@ router.post('/updatemovie/:movieid', netflixSeries.updateGenres);
 router.get('/replaceinfo/:movieid', netflixSeries.formInfo);
 router.post('/replaceinfo/:movieid', netflixSeries.replaceInfo);
 
+router.get('/replaceseasons/:movieid', netflixSeries.formSeasons);
+router.post('/replaceseasons/:movieid', netflixSeries.replaceSeasons);
+
+//router.get('/replaceyears/:movieid', netflixSeries.formYears);
+//router.post('/replaceyears/:movieid', netflixSeries.replaceYears);
+
+//router.get('/replacegenres/:movieid', netflixSeries.formGenresReplace);
+//router.post('/replacegenres/:movieid', netflixSeries.formGenresReplace);
+
+//router.get('/replacelink/:movieid', netflixSeries.formLink);
+//router.post('/replacelink/:movieid', netflixSeries.replaceLink);
+
 router.get('/deletemovie/:movieid', netflixSeries.deleteMovie);
 
 module.exports = router;
