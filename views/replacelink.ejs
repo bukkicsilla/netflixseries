@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1> Replace Movie Link for <%= info.name %></h1> 
+      
+      <p> name: <%= title %> </p>
+      <form class="form-horizontal" action="" method="post" role="form">
+          
+          <p> Field is requiered! </p>
+          <table>
+              
+        <tr>
+        <td>Link</td>
+        <!--<td><input type="text" name="formlink"  value="<%= info.netflixlink %>"></td>-->
+        <td><input type="text" name="formlink"></td>
+        </tr>
+              
+              
+        <tr>
+        <td colspan="2"><input type="submit" value="Save" ></td>
+        </tr>
+    </table>
+          </form>
+      
+    
+  </body>
+</html>
