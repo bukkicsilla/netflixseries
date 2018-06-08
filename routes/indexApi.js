@@ -9,7 +9,7 @@ router.put('/netflixseries/:movieid', netflixseries.updateMovie);
 
 router.patch('/netflixseries/:movieid', netflixseries.replaceInfo);
 
-//router.patch('/netflixseries/:movieid', netflixseries.replaceGenres);
+router.patch('/netflixseries/:movieid/genres', netflixseries.replaceGenres);
 
 
 router.delete('/netflixseries/:movieid', netflixseries.deleteMovie);

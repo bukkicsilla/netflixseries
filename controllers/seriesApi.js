@@ -144,8 +144,7 @@ module.exports.replaceInfo = function(req, res){
   
 //{"genres" : [{"genre":"Douserries"} ,{"genre": "Funny"}]}
 
-
-module.exports.replaceSeasons = function(req, res){
+module.exports.replaceGenres = function(req, res){
     //sendJsonResponse(res, 200, {"status" : "success"});
     if(!req.params.movieid){
         res.status(404);
@@ -168,10 +167,10 @@ module.exports.replaceSeasons = function(req, res){
             //questionanswer.question = req.body.question;
             //questionanswer.answers = req.body.answers;
             //concatenation of the old list and the new item in list
-            //movie.genres = [];
-            //movie.genres = movie.genres.concat(req.body.genres);
-            movie.genres = movie.genres;
-            console.log("API answer genres " + movie.genres);
+            movie.genres = [];
+            movie.genres = movie.genres.concat(req.body.genres);
+            //movie.genres = movie.genres;
+            //console.log("API answer " + movie.genres);
             //console.log("seasons ", req.body.seasons);
             if (req.body.seasons)  movie.seasons = req.body.seasons;
             if (req.body.years) movie.years = req.body.years;
@@ -188,6 +187,7 @@ module.exports.replaceSeasons = function(req, res){
         });
   });
 }
+
 
 
 module.exports.deleteMovie = function(req, res){

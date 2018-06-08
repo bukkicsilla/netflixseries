@@ -28,8 +28,8 @@ router.post('/replaceseasons/:movieid', netflixSeries.replaceSeasons);
 router.get('/replaceyears/:movieid', netflixSeries.formYears);
 router.post('/replaceyears/:movieid', netflixSeries.replaceYears);
 
-//router.get('/replacegenres/:movieid', netflixSeries.formGenresReplace);
-//router.post('/replacegenres/:movieid', netflixSeries.formGenresReplace);
+router.get('/replacegenres/:movieid', netflixSeries.formGenresReplace);
+router.post('/replacegenres/:movieid', netflixSeries.replaceGenres);
 
 router.get('/replacelink/:movieid', netflixSeries.formLink);
 router.post('/replacelink/:movieid', netflixSeries.replaceLink);
