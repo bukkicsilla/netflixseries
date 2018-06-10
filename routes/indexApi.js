@@ -5,11 +5,13 @@ var netflixseries = require('../controllers/seriesApi');
 router.get('/netflixseries', netflixseries.moviesAll);
 router.post('/netflixseries', netflixseries.createMovie);
 router.get('/netflixseries/:movieid', netflixseries.showMovie);
-router.put('/netflixseries/:movieid', netflixseries.updateMovie);
+//router.put('/netflixseries/:movieid', netflixseries.updateMovie);
 
 router.patch('/netflixseries/:movieid', netflixseries.replaceInfo);
+//router.put('/netflixseries/:movieid', netflixseries.replaceInfo);
 
-router.patch('/netflixseries/:movieid/genres', netflixseries.replaceGenres);
+//router.patch('/netflixseries/:movieid/genres', netflixseries.replaceGenres);
+router.put('/netflixseries/:movieid/genres', netflixseries.replaceGenres);
 
 
 router.delete('/netflixseries/:movieid', netflixseries.deleteMovie);

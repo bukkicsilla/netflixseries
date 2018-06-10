@@ -541,6 +541,7 @@ module.exports.replaceLink = function(req, res){
     requestOps = {
     url : apiOps.server + path,
     method : "PATCH",
+    //method: "PUT",
     json : postdata
   };
     console.log("link ", postdata.link);
@@ -597,7 +598,7 @@ module.exports.formGenresReplace = function(req, res){
            function(err, response, body){
             //console.log("form genres "+ body.genres);
             //if (response.statusCode === 200){
-                var genrelist = [];
+                var genrelist = "";
                 var l = body.genres.length;
                 var i;
                 if (l > 0){
@@ -633,16 +634,33 @@ module.exports.replaceGenres = function(req, res){
     //console.log("id :::" + movieid);
     //console.log("******  ", req.params);
   path = "/api/netflixseries/" + req.params.movieid + "/genres";
-  
+  var genrelist = req.body.formgenre.split(",");
+    console.log(" split String ", genrelist);
+    
+    var genredict = [];
+    var l = genrelist.length;
+    var i;
+    for (i = 0; i <l; i++){
+        
+        genredict.push({
+           "genre": genrelist[i]
+            
+        });
+    }
+    console.log("postman list ", genredict);
+    
   postdata = {
       //genres: req.body.formgenre
-      genres: [{"genre": req.body.formgenre}]
+      //genres: [{"genre": req.body.formgenre}]  //only one big String list
+      genres: genredict
+      //genres: [{"genre":"Douserries"} ,{"genre": "Funny"}]
   };
     
     console.log("replace genres ", postdata.genres);
     requestOps = {
     url : apiOps.server + path,
-    method : "PATCH",
+    //method : "PATCH",
+    method: "PUT",
     json : postdata
   };
     console.log("genres ######### ", postdata.genres);
