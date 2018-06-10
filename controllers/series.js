@@ -583,6 +583,7 @@ module.exports.replaceLink = function(req, res){
 /**************************************************************************************************************************/
 
 module.exports.formGenresReplace = function(req, res){
+    //using genres: genrelist is making one String which contains all the genres
     
     var requestOps, path;
     path = "/api/netflixseries/" + req.params.movieid;
@@ -596,7 +597,16 @@ module.exports.formGenresReplace = function(req, res){
            function(err, response, body){
             //console.log("form genres "+ body.genres);
             //if (response.statusCode === 200){
-                console.log('success');
+                var genrelist = [];
+                var l = body.genres.length;
+                var i;
+                if (l > 0){
+                for (i = 0; i < l-1; i++){
+                    genrelist += body.genres[i].genre + ', '
+                }
+                genrelist += body.genres[l-1].genre;
+                }
+                console.log('success genres' , genrelist);
                //renderMovie(req, res, body);   
                 res.render('replacegenres', {
             title: 'Replace Genres',
@@ -606,7 +616,7 @@ module.exports.formGenresReplace = function(req, res){
                 name: body.name,
                 seasons: body.seasons,
                 years: body.years,
-                genres: body.genres,
+                genres: genrelist,
                 netflixlink: body.netflixlink
             }
       });
