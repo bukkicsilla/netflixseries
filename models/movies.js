@@ -6,7 +6,7 @@ var genreSchema = new mongoose.Schema({
 
 var movieSchema = new mongoose.Schema({
     name: { type: String, unique: true, required: true},
-    seasons: {type: Number, min:1, max: 100},
+    seasons: {type: Number, min:0},
     years: {type: String},
     genres: [genreSchema],
     netflixlink: {type: String}
